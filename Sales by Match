@@ -1,0 +1,31 @@
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the sockMerchant function below.
+def remove_item (item, arr):
+    ar = [i for i in arr if i != item]
+    return ar
+def sockMerchant(n, ar):
+    count = int(0)
+    count1 = int(0)
+    for x in ar:
+        count = (ar.count(x)//2)
+        ar = remove_item(x, ar)
+        count1 = count1 + count
+    return (count1)
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    ar = list(map(int, input().rstrip().split()))
+
+    result = sockMerchant(n, ar)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
