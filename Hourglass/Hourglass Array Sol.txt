@@ -1,0 +1,56 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the hourglassSum function below.
+def hourglassSum(arr):
+    i = x = int(0)
+    n = int(3)
+    S1 = S2 = S3 = int(0)
+    maxsum, csum = int(-999), int(0)
+    while x < 4:
+        for y in range(i,n): 
+           print("Now X, Y value", x, y)
+           S1 = arr[x][y] + S1
+           print("Now X, Y value",x+2, y)
+           S2 = arr[x+2][y] + S2
+        print("Now middle term add", x+1,i+1)
+        S3 = arr[x+1][i+1]
+        csum = S1 + S2 + S3
+        print("display current sum --->", csum)
+        S1 = S2 = S3 = 0
+        if csum > maxsum:
+                maxsum = csum
+                print("New Max sum ----> ", maxsum)
+                csum = 0
+        if ((i <= 2) and (n <= 5 )):
+            i = i + 1
+            n = n + 1
+            csum = 0
+            continue
+        if ((n == 6) and (x < 4)):
+            x = x + 1
+            print(" Now moving to row --->", x)
+            i = int(0)
+            n = int(3)    
+    return(maxsum)
+    
+    
+    
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr = []
+
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = hourglassSum(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
