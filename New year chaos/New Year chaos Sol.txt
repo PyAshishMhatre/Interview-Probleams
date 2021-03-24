@@ -1,0 +1,45 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the minimumBribes function below.
+def minimumBribes(q):
+    bribe = int(0)
+    temp = temp1 = temp3 = int(0)
+    q = [i-1 for i in q] #Equalize the index and array like start form 0 
+    for i in range(len(q)-1,-1,-1):#start from last
+        if q[i] != i:#if Q doesnot match with ref array
+            if ((i-1 >= 0) and (q[i-1] == i)):#if 1 space diff
+                temp = q[i-1]
+                q[i-1] = q[i]
+                q[i] = temp
+                bribe += 1
+            elif ((i-2 >= 0) and (q[i-2] == i)):#if 2 space diff
+                temp3 = q[i-2]
+                temp2 = q[i-1]
+                temp = q[i]
+                q[i-2] = temp2
+                q[i] = temp3
+                q[i-1] = temp
+                bribe += 2
+            else:#if both cases fail
+                print("Too chaotic")
+                return
+    print(bribe)
+    return       
+            
+    
+
+if __name__ == '__main__':
+    t = int(input())
+
+    for t_itr in range(t):
+        n = int(input())
+
+        q = list(map(int, input().rstrip().split()))
+
+        minimumBribes(q)
